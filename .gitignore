@@ -1,3 +1,4 @@
+event_log.bin
 pwnboard.log
 *.pyc
 config.yml

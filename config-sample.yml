@@ -10,6 +10,7 @@ server:
     host: http://pwnboard.local
     cache: false
     cache_time: 10
+    event_log: events.log
     logfile: pwnboard.log
 alternate_theme: false
 alert_timeout: 2
