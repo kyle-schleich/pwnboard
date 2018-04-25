@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-import redis
-from . import r, CONFIG
+from . import r
+from . import logger
 
 
 def processEvent(event):
@@ -19,6 +19,9 @@ def parseData(data):
     '''
     Parse updates that come in via POST to the server
     '''
+    if data['ip'] == "127.0.0.1":
+        return
+    logger.debug("updated beacon for {} from {}".format(data['ip'], data['type']))
     status = Status(**data)
     status.save()
 
@@ -93,10 +96,6 @@ class Status(object):
         self.session = session
         self.type = type
         self.last_seen = last_seen
-
-        self.redis = redis.StrictRedis(host=CONFIG['database']['server'],
-                                       port=CONFIG['database']['port'],
-                                       charset='utf-8')
 
     def __str__(self,):
         return "ip: %s, host: %s, session: %s, type: %s, last_seen: %s" % (

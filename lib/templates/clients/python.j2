@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+'''
+Basic python3 function that sends an update to the pwnboard
+'''
+import requests
+import json
+import sys
+
+
+def sendUpdate(ips, name="python"):
+    host = "{{ server }}/generic"
+    data = {'ips': ips, 'type': name}
+    try:
+        req = requests.post(host, json=data, timeout=3)
+        print(req.text)
+        return True
+    except Exception as E:
+        print(E)
+        return False
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        ips = sys.argv[1:]
+    else:
+        print("USAGE: {} [ips...]".format(sys.argv[0]))
+
+    name = "python"
+    sendUpdate(ips, name)
