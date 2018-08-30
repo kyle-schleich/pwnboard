@@ -10,3 +10,4 @@ RUN pip3 install -r /tmp/requirements.txt
 
 # Install all the things
 COPY app /app
+COPY config/nginx.conf /etc/nginx/conf.d/pwnboard.conf
