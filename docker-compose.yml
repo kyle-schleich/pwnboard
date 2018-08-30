@@ -7,6 +7,8 @@ services:
       - "5000:5000"
       - "80:80"
       - "443:443"
+    depends_on:
+      - redis
 
   redis:
     image: redis:alpine

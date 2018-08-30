@@ -4,13 +4,13 @@ slack:
   channel: "#pwnboard"
   send_updates: false
 database:
-  server: localhost
+  server: redis
   port: 6379
 server:
   host: localhost #http://pwnboard.local
   cache: false
   cache_time: 10
   logfile: pwnboard.log
-alternate_theme: false
+alternate_theme: true
 alert_timeout: 2
 host_timeout: 5

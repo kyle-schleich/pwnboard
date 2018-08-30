@@ -59,9 +59,9 @@ def loadConfig():
     TOPO_FILE = 'topology.json'
     CONFIG_FILE = 'config.yml'
     if not os.path.isfile(TOPO_FILE):
-        TOPO_FILE = os.path.dirname(__file__) + '../statics/' + TOPO_FILE
+        TOPO_FILE = os.path.dirname(__file__) + '/../statics/' + TOPO_FILE
     if not os.path.isfile(CONFIG_FILE):
-        CONFIG_FILE = os.path.dirname(__file__) + '../statics/' + CONFIG_FILE
+        CONFIG_FILE = os.path.dirname(__file__) + '/../statics/' + CONFIG_FILE
     # Load a configuration file for the topology
     with open(TOPO_FILE) as of:
         CONFIG.update(json.load(of))
