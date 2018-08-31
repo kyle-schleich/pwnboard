@@ -1,7 +1,7 @@
 # Installing Certbot Certificates
 
 In order to install certificates with [Certbot](https://certbot.eff.org/lets-encrypt/ubuntutzesty-nginx)
-you need to modify `pwnboard/serv/nginx.conf`.
+you need to modify `config/nginx.conf`.
 
 Add your domain name to the `server_name` setting for 443
 ```

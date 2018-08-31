@@ -11,8 +11,8 @@ Install Docker and Docker-compose.
 
 Generate Self-Signed SSL certificates
 ```
-mkdir /etc/nginx/ssl
-openssl req -x509 -nodes -new -batch -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+Run from the root directory of the project.
+openssl req -x509 -nodes -new -batch -keyout app/ssl/server.key -out app/ssl/server.crt
 ```
 
 > If you would like to use LetsEncrypt's Certbot, follow
