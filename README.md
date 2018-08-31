@@ -5,36 +5,14 @@ Modified version of ztgrace/pwnboard
 
 # Running the PWNboard
 ## Install
-#### Flask
-Install all the needed packages and the pwnboard code
-```
-apt-get install -y redis-server python3-redis python3-flask python3-yaml
-git clone https://github.com/micahjmartin/pwnboard /var/www/pwnboard
-chown -R www-data:www-data /var/www/pwnboard
-```
+#### Docker
 
-#### nginx and uwsgi
-If you plan on running pwnboard behind nginx, run the following commands in
-addition to the previous.
-
-Install Packages
-```
-apt-get install nginx uwsgi uwsgi-plugins-python3
-```
-
-Set up the systemd service file and the nginx config
-```
-ln -s /var/www/pwnboard/serv/pwnboard.service /lib/systemd/system/
-systemctl daemon-reload
-ln -s /var/www/pwnboard/serv/nginx.conf /etc/nginx/sites-enabled/pwnboard.conf
-# Delete the default nginx page
-rm /etc/nginx/sites-enabled/default
-```
+Install Docker and Docker-compose.
 
 Generate Self-Signed SSL certificates
 ```
-mkdir /etc/nginx/ssl
-openssl req -x509 -nodes -new -batch -keyout /etc/nginx/ssl/server.key -out /etc/nginx/ssl/server.crt
+Run from the root directory of the project.
+openssl req -x509 -nodes -new -batch -keyout app/ssl/server.key -out app/ssl/server.crt
 ```
 
 > If you would like to use LetsEncrypt's Certbot, follow
@@ -122,13 +100,9 @@ alerttime: 2
 ```
 
 ## Running
-#### Flask
-To directly run the Flask app, run `python3 /var/www/pwnboard.py`
-from the commandline
-
-#### uWSGI/NGINX
-Make sure you follow the installation instructions for nginx/uwsgi and then
-run `systemctl start pwnboard`
+#### Docker
+Make sure you have modified the configuration to your needs and then simply run
+docker-compose up.
 
 
 

@@ -1,19 +1,13 @@
-FROM alpine:latest
+FROM tiangolo/uwsgi-nginx-flask:python3.6
 
 EXPOSE 5000
 
 # Install package dependencies
-RUN apk add --update python3 uwsgi
+# RUN apk add --update python3 uwsgi
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install --upgrade pip
 RUN pip3 install -r /tmp/requirements.txt
 
-# Install requirements
-RUN mkdir -p /opt/pwnboard/
-COPY lib /opt/pwnboard/
-COPY pwnboard.py /opt/pwnboard/
-COPY config/config.yml /opt/pwnboard/
-COPY config/topology.json /opt/pwnboard/
-COPY config/wsgi.yml /opt/pwnboard/
-
-CMD ["uwsgi", "--yaml", "/opt/pwnboard/wsgi.yml"]
+# Install all the things
+COPY app /app
+COPY config/nginx.conf /etc/nginx/conf.d/pwnboard.conf
