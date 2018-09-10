@@ -103,7 +103,11 @@ def main():
     # Get the networks
     config['networks'] = addNetworks()
     print(json.dumps(config, indent=4))
+    with open('topology.json', 'w') as f:
+        f.write(json.dumps(config, indent=4))
     print(yaml.dump(config, default_flow_style=False))
+    with open('topology.yaml', 'w') as f:
+        f.write(yaml.dump(config, default_flow_style=False))
 
 
 if __name__ == '__main__':
