@@ -1,7 +1,7 @@
 #!/bin/bash
 # Check for our certs
 check_certs () {
-certs="no"
+    certs="no"
     if [ -f app/ssl/server.crt ]; then
         certs="yes"
     fi
@@ -51,7 +51,7 @@ setup_topology () {
     else
         echo Lets build us a topology.
         echo You will find the default in app/statics/topology.json
-        echo Hopefully you new that and already looked :)
+        echo Hopefully you new that and already looked.
         echo Will you want to use a script to help build the topology?
         echo If yes we will need python 3, pip as well as yaml and termcolor installed, there will be a prompt to install these.
         echo Use script to build topology y/n
@@ -62,14 +62,21 @@ setup_topology () {
             if [ $input == "y" ]; then
                 apt-get install python3
                 apt-get install python3-pip
-                pip install -r runMe.requirements.txt
-                # some other stuff
+                pip3 install -r runMe.requirements.txt
             else
-                # nada?
+                echo ima just run now.
             fi
             python3 scripts/generate_config.py
-            mv app/statics/topology.json app/statics/topology.default.json
-            cp scripts/topology.json app/statics/topology.json
+            if [ -f app/statics/topology.json ]; then
+                mv app/statics/topology.json app/statics/topology.default.json
+            else
+                echo topology.json is missing, not always a bad thing.
+            fi
+            if [ -f topology.json ]; then
+                cp topology.json app/statics/topology.json
+            else
+                echo topology.json has not been made. RIP
+            fi
         else
             echo Cool have fun and re run me when you are happy with it.
             return 0
@@ -79,15 +86,29 @@ setup_topology () {
 
 # woot
 woooosh () {
+    docker-compose build
     echo OMG we are going to run!!!
     docker-compose up
 }
 
+# Utility function?
+# So this still needs an if so... useful?
+check_file (file) {
+    local found="no"
+    if [ -f $file ]; then
+        local found="yes"
+        return 0
+    fi
+    return 1
+}
+
 main () {
     check_certs
-    if [ $certs == "no"]; then
+    if [ $certs == "no" ]; then
         cert_install
         exit
-    setup_config
+    fi
+    setup_topology
     woooosh
 }
+main
