@@ -91,17 +91,6 @@ woooosh () {
     docker-compose up
 }
 
-# Utility function?
-# So this still needs an if so... useful?
-check_file (file) {
-    local found="no"
-    if [ -f $file ]; then
-        local found="yes"
-        return 0
-    fi
-    return 1
-}
-
 main () {
     check_certs
     if [ $certs == "no" ]; then
