@@ -19,7 +19,7 @@ cert_install () {
         echo and rename them to server.crt and server.key
         echo What is your full domain for your cert?
         read input
-        cp "/etc/letsencrypt/archive/$input/fullchain1.pem.pem" app/ssl/server.crt
+        cp "/etc/letsencrypt/archive/$input/fullchain1.pem" app/ssl/server.crt
         cp "/etc/letsencrypt/archive/$input/privkey1.pem" app/ssl/server.key
         echo Did dat work?
         return 0
